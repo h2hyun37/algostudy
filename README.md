@@ -1,9 +1,9 @@
 # ADP Expert Group #
 
-### Algorithm Study ###
-We r da best.!!
+### Study Subject ###
+Algorithm
 
-### Member ###
+### Study Member ###
 * [Xenomity] 이승한
 * [Nedaair] 서정수
 * [h2hyun37] 국현호
