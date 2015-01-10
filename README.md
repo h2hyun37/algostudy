@@ -1,6 +1,6 @@
 # ADP Expert Group #
 
-### Introduce ###
+### Study Algorithm ###
 We r da best.!!
 
 ### Member ###
