@@ -1,6 +1,6 @@
 # ADP Expert Group #
 
-## Algorithm Study ###
+### Algorithm Study ###
 We r da best.!!
 
 ### Member ###
