@@ -1,4 +1,4 @@
-package h2hyun37.study;
+package h2hyun37.study.sort;
 
 public class InsertionSortExam {
 
