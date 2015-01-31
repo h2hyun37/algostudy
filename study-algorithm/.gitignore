@@ -3,3 +3,4 @@
 /.settings
 .project
 .cache
+.DS_Store
