@@ -3,7 +3,7 @@ package xenomity.euler.problem;
 import xenomity.euler.AbstractProblem;
 
 /**
- * Problem 10
+ * Problem 11
  * 
  * <pre>
  * 아래와 같은 20×20 격자가 있습니다.
