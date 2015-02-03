@@ -3,6 +3,9 @@ package xenomity.euler.problem;
 import xenomity.euler.AbstractProblem;
 
 /**
+ * Problem 12
+ * 
+ * <pre>
  * 1부터 n까지의 자연수를 차례로 더하여 구해진 값을 삼각수라고 합니다.
  * 예를 들어 7번째 삼각수는 1 + 2 + 3 + 4 + 5 + 6 + 7 = 28이 됩니다.
  * 이런 식으로 삼각수를 구해 나가면 다음과 같습니다.
@@ -20,6 +23,7 @@ import xenomity.euler.AbstractProblem;
  * 위에서 보듯이, 5개 이상의 약수를 갖는 첫번째 삼각수는 28입니다.
  * 
  * 그러면 500개 이상의 약수를 갖는 가장 작은 삼각수는 얼마입니까?
+ * </pre>
  * 
  * @author Xenomity a.k.a P-slinc' (이승한)
  * @since 2015. 2. 1.
