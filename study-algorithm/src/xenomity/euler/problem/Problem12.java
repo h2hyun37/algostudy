@@ -27,36 +27,52 @@ import xenomity.euler.AbstractProblem;
  */
 public class Problem12 extends AbstractProblem<Long> {
 	
-	private long value;
+	private static final int MIN_LIMIT_DIVISOR_SIZE = 500;
+	private long value = 1;
 
 	@Override
 	public void problem() {
-		int currentNumber = 1;
-		
-		while (true) {
-			value += currentNumber++;
+		for (long i = 1; ; i++, value += i) {
+			int divisorSize = getDivisorSize(value);
 			
-			if (getDivisorSize(value) >= 500) {
+			System.out.printf("[%d] divisor count: %d\n", value, divisorSize);
+			
+			if (divisorSize >= MIN_LIMIT_DIVISOR_SIZE) {
 				break;
 			}
 		}
 	}
 	
-	// 약수 개수
+	/*
+	 * 소인수분해를 통한 약수 개수 구하기.
+	 * 
+	 * e.g.
+	 * 60을 소인수분해하면 60 = 2²×3×5 이므로
+	 * 약수의 개수는 (지수+1)의 곱.
+	 * 
+	 * 3과 5의 지수는 1 이므로
+	 * (2+1)×(1+1)×(1+1) = 3×2×2 = 12개.
+	 */
 	private int getDivisorSize(long number) {
 		if (number <= 1) {
 			return 1;
 		}
 		
-		int divisorSize = 2; // 1과 자기 자신의 수는 공통 약수.
+		int divisorSize = 1;
 		
-		for (int i = 2; i < number; i++) {
-			if (number % i == 0) {
-				divisorSize++;
+		for (long i = 2; i <= number; i++) {
+			int jisuSize = 0;
+			
+			while (number % i == 0) {
+				number /= i;
+				
+				jisuSize++;
+			}
+			
+			if (jisuSize > 0) {
+				divisorSize *= (jisuSize + 1);
 			}
 		}
-		
-		System.out.printf("[%d] %d\n", number, divisorSize);
 		
 		return divisorSize;
 	}
