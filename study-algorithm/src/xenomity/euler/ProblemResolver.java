@@ -25,7 +25,7 @@ public final class ProblemResolver {
 	}
 	
 	public static void main(String[] args) throws InstantiationException, IllegalAccessException {
-		ProblemResolver.resolve(Problem2.class);
+		ProblemResolver.resolve(Problem13.class);
 	}
 	
 }
