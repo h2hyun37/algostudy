@@ -29,10 +29,10 @@ import xenomity.euler.AbstractProblem;
 public class Problem14 extends AbstractProblem<Integer> {
 	
 	private int value = 1000000;
+	private int maxValue = value;
 
 	@Override
 	public void problem() {
-		int maxValue = value;
 		int maxOperationCount = 0;
 		
 		while (value > 0) {
@@ -50,12 +50,12 @@ public class Problem14 extends AbstractProblem<Integer> {
 			value--;
 		}
 		
-		System.out.printf("Max Value: %d, Max Count: %d", maxValue, maxOperationCount);
+		System.out.printf("Max Value: %d, Max Count: %d\n", maxValue, maxOperationCount);
 	}
 
 	@Override
 	public Integer getResult() {
-		return value;
+		return maxValue;
 	}
 
 }
