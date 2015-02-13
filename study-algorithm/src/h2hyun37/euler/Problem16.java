@@ -148,7 +148,7 @@ public class Problem16 {
 
 		// display elapsed time
 		System.out.println("Process Time: " + (System.nanoTime() - startTime)
-				/ 1000.0 + " micro sec.");
+				* 1000.0 + " micro sec.");
 
 		long startTime2 = System.nanoTime();
 
@@ -156,7 +156,7 @@ public class Problem16 {
 
 		// display elapsed time
 		System.out.println("Process Time: " + (System.nanoTime() - startTime2)
-				/ 1000.0 + " micro sec.");
+				* 1000.0 + " micro sec.");
 
 	}
 }

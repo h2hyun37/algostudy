@@ -90,7 +90,7 @@ public class Problem14 {
 
 		// display elapsed time
 		System.out.println("Process Time: "
-				+ (System.nanoTime() - startTime) / 1000.0
+				+ (System.nanoTime() - startTime) * 1000.0
 				+ " micro sec.");
 
 	}
