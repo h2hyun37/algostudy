@@ -10,6 +10,7 @@ def fibonacci(n) :
     global count1
 
 
+
     if n == 0 :
         count0 =  count0 + 1
         return 0
