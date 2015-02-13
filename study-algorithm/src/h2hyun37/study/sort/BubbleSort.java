@@ -26,7 +26,7 @@ public class BubbleSort {
 	private void makeRandomArray() {
 
 		/*
-		 * 0 ~ 65535 사이의 임의의 랜덤 배열을 생성
+		 * 0 ~ 1000000 사이의 임의의 랜덤 배열을 생성
 		 */
 		for (int idx = 0; idx < data.length; idx++) {
 			data[idx] = (int) (Math.random() * 1000000);
