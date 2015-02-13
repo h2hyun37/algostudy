@@ -1,29 +1,31 @@
 
 
+dP = {1:1}              #dynamic programming
 
-def collatz(target) :
+def collatz(arg) :
 
-    i = 1
+    target = arg
 
+    i = 0
     while 1 :
-        i+= 1
-        if target % 2 == 0 :
-            target = target / 2
-        else :
-            target = 3 * target + 1
-
-
-        if target == 1 :
+        if target in dP :
+            dP[arg] = i
             break
 
-    return i
+        if target % 2 == 0 :
+            i = i+1
+            target = target / 2
+        else :
+            i = i+1
+            target = 3 * target + 1
 
+    return i + dP[target]
 
 
 maxProcessCnt = 0
 collatzNum = 0
 
-for i in xrange(2, 1000001) :
+for i in xrange(1, 1000001) :
     processCnt =  collatz(i)
 
 
