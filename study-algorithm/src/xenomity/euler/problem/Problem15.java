@@ -1,5 +1,7 @@
 package xenomity.euler.problem;
 
+import java.math.BigInteger;
+
 import xenomity.euler.AbstractProblem;
 
 /**
@@ -15,18 +17,31 @@ import xenomity.euler.AbstractProblem;
  * @since 2015. 2. 11.
  *
  */
-public class Problem15 extends AbstractProblem<Integer> {
+public class Problem15 extends AbstractProblem<BigInteger> {
+	
+	private BigInteger value = BigInteger.ZERO;
 
 	@Override
 	public void problem() {
-		// TODO Auto-generated method stub
+		BigInteger temp = factorial(20);
+		BigInteger div = factorial(40);
 		
+		value = div.divide(temp.multiply(temp));
+	}
+	
+	private BigInteger factorial(long n) {
+		BigInteger result = new BigInteger("1");
+		
+		for (long i = 2; i <= n; i++) {
+			result = result.multiply(BigInteger.valueOf(i));
+		}
+		
+		return result;
 	}
 
 	@Override
-	public Integer getResult() {
-		// TODO Auto-generated method stub
-		return null;
+	public BigInteger getResult() {
+		return value;
 	}
 
 }
