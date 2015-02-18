@@ -1,23 +1,26 @@
 package h2hyun37.study.sort;
 
-public class BubbleSort {
+public class VariationOfSelectionSort {
 
 	/*
-	 * 버블 소트
+	 * 선택정렬 변형
+	 *  - 원래 1회 순회하면서 swap이 1번 일어나야 하지만
+	 *  1회 순회하는 동안 순서정렬이 필요한 모든 경우에 swap
+	 *
 	 *
 	 */
 
 
 	int[] data;
 
-	public BubbleSort(int size) {
+	public VariationOfSelectionSort(int size) {
 
 		data = new int[size];
 		this.makeRandomArray();
 
 	}
 
-	public BubbleSort(int[] array) {
+	public VariationOfSelectionSort(int[] array) {
 
 		data = array;
 
@@ -82,24 +85,24 @@ public class BubbleSort {
 		/*
 		 * array init.
 		 */
-		BubbleSort bs = new BubbleSort(100000);
-		bs.printData();
+		VariationOfSelectionSort selectionSort = new VariationOfSelectionSort(100000);
+		selectionSort.printData();
 
 
 		/*
-		 * bubble sort
+		 * selection sort
 		 */
 		long startTime = System.nanoTime();
 
 		long startTime2 = System.currentTimeMillis();
 
-		bs.sort();
+		selectionSort.sort();
 
 		long endTime = System.nanoTime();
 
 		long endTime2 = System.currentTimeMillis();
 
-		bs.printData();
+		selectionSort.printData();
 
 		// display elapsed time
 		System.out.println("Process Time: " + (endTime - startTime)
