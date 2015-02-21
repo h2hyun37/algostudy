@@ -1,6 +1,8 @@
 package xenomity.euler.problem;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.List;
 
 import xenomity.euler.AbstractProblem;
 
@@ -26,9 +28,13 @@ public class Problem20 extends AbstractProblem<Integer> {
 
 	@Override
 	public void problem() {
+		List<String> charArray = new ArrayList<>();
+		
 		for (char ch : factorial(100).toString().toCharArray()) {
-			value += Integer.valueOf(String.valueOf(ch));
+			charArray.add(String.valueOf(ch));
 		}
+		
+		value = charArray.stream().mapToInt(Integer::valueOf).sum();
 	}
 	
 	private BigInteger factorial(int number) {
