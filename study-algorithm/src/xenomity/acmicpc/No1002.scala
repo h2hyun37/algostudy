@@ -1,4 +1,4 @@
-package xenomity.baekjoon
+package xenomity.acmicpc
 
 import scala.collection.mutable.ListBuffer
 

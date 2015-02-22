@@ -1,5 +1,8 @@
-package xenomity.baekjoon
+package xenomity.acmicpc
 
+/**
+ * ACMICPC No.1004
+ */
 class No1004 {
   def resolve(myPoints: Array[Point], planetPoints: Array[Circle]): Int = {
     var result = 0;

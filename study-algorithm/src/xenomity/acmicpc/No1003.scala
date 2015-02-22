@@ -1,4 +1,4 @@
-package xenomity.baekjoon
+package xenomity.acmicpc
 
 /*
  * No. 1003
