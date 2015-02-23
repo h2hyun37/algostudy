@@ -5,15 +5,7 @@ package xenomity.acmicpc
  */
 class No1004 {
   def resolve(myPoints: Array[Point], planetPoints: Array[Circle]): Int = {
-    var result = 0;
-    
-    for (i <- 0 until planetPoints.length) {
-      if (validate(myPoints(0), planetPoints(i)) || validate(myPoints(1), planetPoints(i))) {
-        result += 1
-      }
-    }
-    
-    result
+    planetPoints.count((planetPoint) => validate(myPoints(0), planetPoint) || validate(myPoints(1), planetPoint))
   }
   
   private def validate(myPoint: Point, planetPoint: Circle): Boolean = {
