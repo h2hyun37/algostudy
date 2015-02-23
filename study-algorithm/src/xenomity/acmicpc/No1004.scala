@@ -7,35 +7,30 @@ class No1004 {
   def resolve(myPoints: Array[Point], planetPoints: Array[Circle]): Int = {
     var result = 0;
     
-    for (i <- 0 to planetPoints.length - 1) {
+    for (i <- 0 until planetPoints.length) {
       if (validate(myPoints(0), planetPoints(i)) || validate(myPoints(1), planetPoints(i))) {
         result += 1
       }
     }
     
-    def validate(myPoint: Point, planetPoint: Circle): Boolean = {
-      var leftSide = Math.pow(myPoint.getX() - planetPoint.getX(), 2) + Math.pow(myPoint.getY() - planetPoint.getY(), 2)
-      var rightSide = Math.pow(planetPoint.getRadius(), 2)
-      
-      leftSide < rightSide
-    }
-    
     result
+  }
+  
+  private def validate(myPoint: Point, planetPoint: Circle): Boolean = {
+    val leftSide = Math.pow(myPoint.x - planetPoint.x, 2) + Math.pow(myPoint.y - planetPoint.y, 2)
+    val rightSide = Math.pow(planetPoint.radius, 2)
+    
+    leftSide < rightSide
   }
 }
   
-private class Point(val x: Int, val y: Int) {
-  def getX() = x
-  def getY() = y
-}
+private class Point(val x: Int, val y: Int) {}
 
-private class Circle(override val x: Int, override val y: Int, r: Int) extends Point(x, y) {
-  def getRadius() = r
-}
+private class Circle(override val x: Int, override val y: Int, val radius: Int) extends Point(x, y) {}
 
 object No1004Test {
   def main(args: Array[String]) {
-    var no1004 = new No1004
+    val no1004 = new No1004
 
     println(no1004.resolve(
         Array(new Point(-5, 1), new Point(12, 1)),
