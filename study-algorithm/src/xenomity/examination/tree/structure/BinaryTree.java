@@ -1,6 +1,5 @@
 package xenomity.examination.tree.structure;
 
-
 /**
  * Binary Tree (이진 트리)
  * 
@@ -132,10 +131,6 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 			throw new IllegalAccessException("parent node is empty node.");
 		}
 		
-		if (binaryTree.isFull()) {
-			throw new IllegalAccessException("parent node have two child nodes.");
-		}
-		
 		// set parent
 		parent = binaryTree;
 	}
@@ -208,6 +203,28 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 		}
 		
 		return containIndex;
+	}
+	
+	/**
+	 * Print all nodes (by DFS)
+	 * 
+	 * @param treeNode tree node
+	 * @return all nodes text
+	 */
+	public static String toString(TreeNode<Integer> treeNode) {
+		StringBuffer buffer = new StringBuffer();
+		buffer.append(treeNode.toString());
+		buffer.append(" ");
+		
+		if (treeNode.getChild(BinaryTree.LEFT_NODE) != null) {
+			buffer.append(toString(treeNode.getChild(BinaryTree.LEFT_NODE)));
+		}
+		
+		if (treeNode.getChild(BinaryTree.RIGHT_NODE) != null) {
+			buffer.append(toString(treeNode.getChild(BinaryTree.RIGHT_NODE)));
+		}
+		
+		return buffer.toString();
 	}
 
 }
