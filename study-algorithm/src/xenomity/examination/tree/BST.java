@@ -37,13 +37,51 @@ public class BST {
 	}
 	
 	@Test
-	public void add(BinaryTree tree, int value) {
-		// TODO: later
+	public TreeNode<Integer> add(TreeNode<Integer> treeNode, int value) {
+		if (treeNode.getNodeValue() == null) {
+			treeNode.setNodeValue(value);
+			
+			return treeNode;
+		}
+		
+		if (value < treeNode.getNodeValue()) {
+			return add(treeNode.getChild(BinaryTree.LEFT_NODE), value);
+		} else {
+			return add(treeNode.getChild(BinaryTree.RIGHT_NODE), value);
+		}
 	}
 	
 	@Test
-	public void remove(BinaryTree tree, int value) {
-		// TODO: later
+	public void remove(BinaryTree treeNode, int value) throws IllegalAccessException {
+		BinaryTree parentTree = (BinaryTree) treeNode.getParent();
+		
+		if (treeNode.isLeaf()) {
+			parentTree.removeChild(treeNode);
+		} else if (treeNode.getChild(BinaryTree.LEFT_NODE).getNodeValue() != null
+				|| treeNode.getChild(BinaryTree.RIGHT_NODE).getNodeValue() != null) {
+			BinaryTree childNode = treeNode.getChild(BinaryTree.LEFT_NODE).getNodeValue() != null
+					? (BinaryTree) treeNode.getChild(BinaryTree.LEFT_NODE)
+					: (BinaryTree) treeNode.getChild(BinaryTree.RIGHT_NODE);
+			
+			int childIndex = parentTree.contain(childNode);
+			parentTree.setChild(childNode, childIndex);
+		} else {
+			BinaryTree leftChildNode = (BinaryTree) treeNode.getChild(BinaryTree.LEFT_NODE);
+			BinaryTree rightChildNode = (BinaryTree) treeNode.getChild(BinaryTree.RIGHT_NODE);
+			BinaryTree parentNode = (BinaryTree) treeNode.getParent();
+			int targetNodeIndex = parentNode.contain(treeNode);
+			
+			// TODO: 직후 원소 찾기.
+			BinaryTree replaceNode = parentTree;
+			BinaryTree replaceChildNode = (BinaryTree) replaceNode.getChild(BinaryTree.RIGHT_NODE);
+			BinaryTree replaceParentNode = (BinaryTree) replaceNode.getParent();
+			
+			// replace
+			parentNode.setChild(replaceNode, targetNodeIndex);
+			replaceNode.setChild(leftChildNode, BinaryTree.LEFT_NODE);
+			replaceNode.setChild(rightChildNode, BinaryTree.RIGHT_NODE);
+			replaceParentNode.setChild(replaceChildNode, BinaryTree.RIGHT_NODE);
+		}
 	}
 	
 	@Test
@@ -60,8 +98,8 @@ public class BST {
 		if (treeNode.getNodeValue() == value) {
 			return true;
 		} else if (!treeNode.isLeaf()) {
-			TreeNode<Integer> leftChildNode = treeNode.getChild(0);
-			TreeNode<Integer> rightChildNode = treeNode.getChild(1);
+			TreeNode<Integer> leftChildNode = treeNode.getChild(BinaryTree.LEFT_NODE);
+			TreeNode<Integer> rightChildNode = treeNode.getChild(BinaryTree.RIGHT_NODE);
 			
 			if (leftChildNode != null && treeNode.getNodeValue() > value) {
 				return search(leftChildNode, value);
