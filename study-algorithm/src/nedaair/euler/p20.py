@@ -1,6 +1,6 @@
 __author__ = 'nedaair'
 
-from nedaair.math.factorial import factorial
+from nedaair.util.smath import factorial
 
 
 def sumDigitNumber(n) :
