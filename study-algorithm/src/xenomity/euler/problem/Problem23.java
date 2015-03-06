@@ -55,7 +55,7 @@ public class Problem23 extends AbstractProblem<Long> {
 		Stream<Integer> sumStream = sumList.stream().distinct();
 		
 		// #3. 초과수 합을 제외한 나머지 수의 합.
-		sum = LongStream.rangeClosed(0, MAX_LIMIT).sum()- sumStream.mapToLong(Integer::toUnsignedLong).sum();
+		sum = LongStream.rangeClosed(0, MAX_LIMIT).sum() - sumStream.mapToLong(Integer::toUnsignedLong).sum();
 	}
 	
 	// 초과수 여부
