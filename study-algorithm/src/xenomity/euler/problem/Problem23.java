@@ -2,6 +2,7 @@ package xenomity.euler.problem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 import java.util.stream.Stream;
 
@@ -36,20 +37,14 @@ public class Problem23 extends AbstractProblem<Long> {
 	@Override
 	public void problem() {
 		// #1. 초과수 리스트 확보.
-		List<Integer> exceedNumberList = new ArrayList<>();
-		
-		for (int i = 1; i <= MAX_LIMIT; i++) {
-			if (isExceedNumber(i)) {
-				exceedNumberList.add(i);
-			}
-		}
+		int[] exceedNumberArray = IntStream.rangeClosed(1, MAX_LIMIT).filter(x -> isExceedNumber(x)).toArray();
 		
 		// #2.초과수 합 리스트 확보.
 		List<Integer> sumList = new ArrayList<>();
 				
-		for (int i = 0; i < exceedNumberList.size(); i++) {
-			for (int j = i; j < exceedNumberList.size(); j++) {
-				int tempSum = exceedNumberList.get(i) + exceedNumberList.get(j);
+		for (int i = 0; i < exceedNumberArray.length; i++) {
+			for (int j = i; j < exceedNumberArray.length; j++) {
+				int tempSum = exceedNumberArray[i] + exceedNumberArray[j];
 				
 				if (tempSum <= MAX_LIMIT) {
 					sumList.add(tempSum);
@@ -60,7 +55,7 @@ public class Problem23 extends AbstractProblem<Long> {
 		Stream<Integer> sumStream = sumList.stream().distinct();
 		
 		// #3. 초과수 합을 제외한 나머지 수의 합.
-		sum = LongStream.rangeClosed(0, MAX_LIMIT).sum() - sumStream.mapToLong(Integer::toUnsignedLong).sum();
+		sum = LongStream.rangeClosed(0, MAX_LIMIT).sum()- sumStream.mapToLong(Integer::toUnsignedLong).sum();
 	}
 	
 	// 초과수 여부
