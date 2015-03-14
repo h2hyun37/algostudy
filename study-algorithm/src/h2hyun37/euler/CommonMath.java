@@ -6,6 +6,34 @@ import java.util.Arrays;
 
 public class CommonMath {
 
+	/**
+	 * 팩토리얼 값을 리턴한다. 팩토리얼 정의에 따라 0! = 1 이고 입력값은 0 이상의 정수만 받는다.
+	 *
+	 * 또한 내부적으로 primitive type만 이용하여 계산을 하기 때문에 number <= 20 의 제약을 가진다....
+	 *
+	 *
+	 * @param number
+	 *            : 팩토리얼을 구할 0 이상의 정수
+	 * @return long : 팩토리얼을 계산한 결과값. number 값이 0보다 작다면 -1 리턴
+	 *
+	 */
+	public static long factorialInteger(int number) {
+
+		if (number < 0) {
+			return -1;
+		}
+
+		if (number == 0) {
+			return 1;
+		}
+
+		long returnValue = 1;
+		for (int i = 1; i <= number; i++) {
+			returnValue *= i;
+		}
+
+		return returnValue;
+	}
 
 	/**
 	 * 모든 양의 약수를 구하여 리턴. 자기자신은 제외하여 리턴한다. (진약수 리턴)
