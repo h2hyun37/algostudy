@@ -41,17 +41,6 @@ public class Problem25 extends AbstractProblem {
 		BigInteger f2 = BigInteger.ONE;
 		BigInteger f3 = BigInteger.ZERO;
 
-		/*
-		 * 1000자리 의 수를 만든다
-		 */
-		StringBuilder sb = new StringBuilder();
-		sb.append("1");
-		for (int i = 1; i <= 999; i++) {
-			sb.append("0");
-		}
-		BigInteger targetNum = new BigInteger(sb.toString());
-
-
 		int count = 3; // 피보나치 3번째 수열부터 구하기 위해.
 
 		while (true) {

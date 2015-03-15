@@ -1,6 +1,7 @@
 package h2hyun37.euler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -20,17 +21,6 @@ public class Problem24 extends AbstractProblem {
 
 
 
-	public void solveProblem2() {
-
-		int[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-
-		List<Integer> list = new ArrayList<Integer>(1000000);
-
-		int count = 0;
-
-
-	}
-
 	@Override
 	public void solveProblem() {
 
@@ -45,96 +35,79 @@ public class Problem24 extends AbstractProblem {
 		StringBuilder sb = new StringBuilder();
 
 		/*
-		 * 구하려는 순서 번호
+		 * 구하려는 순서
 		 */
-		int orderNumber = 1000000;
+		int orderNumber = 362881;
 
 		int quotient = 0; // 몫
 		int remainder = 0; // 나머지
 		int divisor = 0; // 나눔수
 
 
-		for (int i = 10; i >= 2 && orderNumber > 0; i--) {
+		/*
+		 * n : n번째 자리수
+		 * orderNumber : 구하려는 순서
+		 */
+		/*
+		 * n번째 자리수를 구하기 위해, n-1번째에 올수있는 경우의 수를 구한다.
+		 * 구하려는 순서를 경우의 수로 나누고,
+		 *
+		 * 1) 나머지가 0보다 크면 : list의 n번째 수가 n번째 자리수. (list 는 index 가 0부터 시작하므로.)
+		 * 2) 나머지가 0이면 : list의 n-1번째 자리수가 n번째 자리수.
+		 */
+		for (int n = 10; n >= 2 && orderNumber > 0; n--) {
 
-			divisor = (int) CommonMath.factorialInteger(i);
+			System.out.printf("%d번째 자리수 : ", n);
 
-			if (divisor > orderNumber) {
-				System.out.printf(
-"divisor %d > orderNumber %d -> get first number of remaining numbers %d\n",
-						divisor, orderNumber, list.get(0));
-				sb.append(list.get(0));
-				list.remove(list.get(0));
-				continue;
-			}
-
-			System.out.println(i);
 
 			/*
-			 * 몫 quotient , 나머지 orderNumber
+			 * STEP 1: n-1번째 경우의 수(factorial)을 구하고, 구하려는 순서로 경우의 수를 나눈다.
 			 */
+			divisor = (int) CommonMath.factorialInteger(n - 1);
 			quotient = orderNumber / divisor;
 			remainder = orderNumber - divisor * quotient;
 
-			if (quotient >= list.size()) {
-				sb.append(list.get(0));
-				list.remove(0);
-			} else {
+
+			/*
+			 * 1) 나머지가 0보다 크면 : list의 n번째 수가 n번째 자리수. (list 는 index 가 0부터 시작하므로.)
+			 * 2) 나머지가 0이면 : list의 n-1번째 자리수가 n번째 자리수.
+			 */
+			if (remainder > 0) {
 				sb.append(list.get(quotient));
 				list.remove(quotient);
+			} else {
+				sb.append(list.get(quotient - 1));
+				list.remove(quotient - 1);
 			}
 
+
 			System.out
-					.printf("orderNumber : %d, divisor : %d (%d!),  몫: %d, 나머지: %d , sb : %s, list : %s\n",
-							orderNumber, divisor, i, quotient, remainder,
-							sb.toString(),
-							list.toString());
+					.printf("경우의수(%d! == %d) <= 구하려는순서(%d) -> 몫: %d, 나머지: %d , result값 : %s, 남은숫자리스트 : %s\n",
+							n - 1, divisor, orderNumber, quotient, remainder,
+							sb.toString(), list.toString());
 
 			orderNumber = remainder;
+
+
 		}
 
-		for (Integer i : list) {
-			sb.append(i.toString());
+
+		/*
+		 * 나머지(orderNumber)가 남아 있다면 : 남은 숫자는 순서대로 출력 (사전시 순서)
+		 *
+		 * 나머지가 남아 있지 않다면 : 남은 숫자는 역순 출력 (나머지가 없다는 것은 n-1번째 경우의 수에서 딱 떨어졌다는 것이므로
+		 * 가장 후순위 값을 출력해야함)
+		 */
+		if (orderNumber == 0) {
+			Collections.reverse(list);
+		}
+		for (Integer n : list) {
+			sb.append(n.toString());
 		}
 
-		System.out.println(sb.toString());
 
-		// /*
-		// * STEP 1 : 맨 처음 자리수를 뺀 나머지 9자리로 만들 수 있는 순열의 갯수를 구한다 (factorial 9 =
-		// 362,880)
-		// */
-		// divisor = (int) CommonMath.factorialInteger(9);
-		//
-		// quotient = orderNumber / divisor;
-		// orderNumber = orderNumber - divisor * quotient;
-		//
-		// sb.append(list.get(quotient - 1));
-		// list.remove(quotient - 1);
-		//
-		// System.out.println(sb.toString());
-		//
-		//
-		// // 8! = 40,320
-		// divisor = (int) CommonMath.factorialInteger(8);
-		//
-		// quotient = orderNumber / divisor;
-		// orderNumber = orderNumber - divisor * quotient;
-		//
-		// sb.append(list.get(quotient - 1));
-		// list.remove(quotient - 1);
-		//
-		// System.out.println(sb.toString());
-		//
-		// // /*
-		// // * STEP 2: 맨 처음 자리수가 0->1->2로 증가할 때에 가능한 순열의 갯수를 구하고, 구하려는 순서번호가
-		// 어디에
-		// // 속하는지 계산한다
-		// // */
-		// // for (int mul = 1; mul <= 10; mul++) {
-		// // if (factorial9 * mul > orderNumber) {
-		// // System.out.println(numberArr[mul - 2]);
-		// // break;
-		// // }
-		// // }
+
+		System.out.println("result : " + sb.toString());
 
 
 	}
