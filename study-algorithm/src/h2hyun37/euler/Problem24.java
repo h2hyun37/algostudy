@@ -37,7 +37,7 @@ public class Problem24 extends AbstractProblem {
 		/*
 		 * 구하려는 순서
 		 */
-		int orderNumber = 362881;
+		int orderNumber = 1000000;
 
 		int quotient = 0; // 몫
 		int remainder = 0; // 나머지
