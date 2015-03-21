@@ -1,6 +1,26 @@
+
+#-*- coding: utf-8 -*-
 __author__ = 'nedaair'
 
 import math
+
+def isPrime(x) :
+    #print "isPrime", x
+    if  x <= 1 :
+        return False
+    elif  x % 2 == 0 :
+        return x==2 #짝수는 2만 소수이다
+    else :
+        sq = int(math.sqrt(x)) +1
+        #이미 짝수는 제외시켰으므로, [3, sqrt(x)]범위에서 약수가 존재하는지 확인한다.
+
+        for i in range(3, sq+1, 2) :
+            if x % i == 0 :
+                #약수가 존재한다면 소수가 아니다.
+                return False
+
+    #이때까지 약수가 발견되지 않았다면 소수이다.
+    return True
 
 def sosu(target) :
 
@@ -47,3 +67,12 @@ def factorial(n) :
             sum = sum * i
 
         return sum
+
+def fibonacci(n) :
+
+    if n == 0 :
+        return 0
+    elif n == 1 :
+        return 1
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
