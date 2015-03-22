@@ -44,6 +44,7 @@ public class Problem5 extends AbstractProblem<Integer> {
 		return (max % min == 0) ? min : 최대공약수_유클리드_호제법(min, max - min);
 	}
 	
+	@SuppressWarnings("unused")
 	private int 최소공배수(int a, int b) {
 		return a * b / 최대공약수_유클리드_호제법(a, b);
 	}
