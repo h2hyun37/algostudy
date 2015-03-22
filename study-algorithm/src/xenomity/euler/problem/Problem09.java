@@ -14,7 +14,7 @@ import xenomity.euler.AbstractProblem;
  * @author Xenomity a.k.a P-slinc' (이승한)
  *
  */
-public class Problem9 extends AbstractProblem<Long> {
+public class Problem09 extends AbstractProblem<Long> {
 	
 	private long result;
 	

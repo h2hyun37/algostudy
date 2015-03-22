@@ -12,7 +12,7 @@ import xenomity.euler.AbstractProblem;
  * @author Xenomity a.k.a P-slinc' (이승한)
  *
  */
-public class Problem1 extends AbstractProblem<Integer> {
+public class Problem01 extends AbstractProblem<Integer> {
 	
 	private int sum;
 
