@@ -17,7 +17,7 @@ import xenomity.euler.AbstractProblem;
  * @author Xenomity a.k.a P-slinc' (이승한)
  *
  */
-public class Problem6 extends AbstractProblem<Integer> {
+public class Problem06 extends AbstractProblem<Integer> {
 	
 	private static final int MAX_LIMIT = 100;
 	private int value;

@@ -2,9 +2,116 @@ package h2hyun37.euler;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class CommonMath {
+
+	static Map<Integer, Boolean> eratosthenes = null;
+
+
+	/**
+	 * 에라토스테네스의 체를 생성한다. <br />
+	 * <br />
+	 * 처음 1회 호출시 2~maxNumber 까지 체를 생성 <br />
+	 * 이후 호출시 기존maxNumber+1 ~ maxNumber까지 체를 생성 <br />
+	 *
+	 * @param maxNumber
+	 *            : 최대로 생성할 숫자. 예를 들어 120이 입력되면 2~120까지의 숫자까지 true/false로 소수여부를
+	 *            구한다
+	 */
+	public static void makeEratosthenes(int maxNumber) {
+
+		// 기존에 이미 체가 생성되어있고, 기존의 size가 maxNumber보다 크면 그냥 리턴
+		if (eratosthenes != null && eratosthenes.size() > maxNumber) {
+			return;
+		}
+
+
+		int primeNumber = 0; // 소수여부를 판별할 시작수
+		if (eratosthenes == null) {
+			eratosthenes = new HashMap<Integer, Boolean>(maxNumber);
+			eratosthenes.put(1, false);
+			primeNumber = 2;
+		} else {
+			primeNumber = eratosthenes.size() + 1;
+		}
+
+
+		// 소수 판별할 수 전체를 true로 초기화 (true : 소수, false : 소수가 아님)
+		for (int key = primeNumber; key <= maxNumber; key++) {
+			eratosthenes.put(key, true);
+		}
+
+
+		for (int number = primeNumber; number <= maxNumber; number++) {
+
+			// 이미 소수가 아니라고 판명된 수는 skip
+			if (eratosthenes.get(number) == false) {
+				continue;
+			}
+
+			for (int divisor = 2; divisor <= number; divisor++) {
+
+				// 소수로만 나눗셈을 하기 위해 소수가 아닌 수는 skip
+				if (eratosthenes.get(divisor) == false) {
+					continue;
+				}
+
+				/*
+				 * 소수로 나누어 떨어지는 경우
+				 *
+				 * 1) number == divisor : 해당 숫자는 소수. 소수의 배수들은 전부 false 처리함.
+				 * 2) number != divisor : 자기 자신 외의 다른 소수로 나누어 떨어지므로 소수가 아님
+				 */
+				if (number % divisor == 0) {
+
+					if (number == divisor) {
+
+						// 소수의 배수들을 전부 false 처리
+						int num2 = number + number;
+						while (num2 <= maxNumber) {
+							eratosthenes.put(num2, false);
+							num2 += number;
+						}
+
+					} else {
+						eratosthenes.put(number, false);
+					}
+
+					break;
+				}
+			}
+		}
+
+	}
+
+
+	/**
+	 * 소수인지를 판별하여 true/false 리턴
+	 *
+	 * @param number 판별할 숫자
+	 * @return 소수인경우 true, 소수가 아니거나 1이하의 정수(0, 음의 정수 포함)인 경우 false
+	 */
+	public static boolean isPrimeNumber(int number) {
+
+		if (number < 2) {
+			return false;
+		}
+
+		if (eratosthenes == null) {
+			makeEratosthenes(number);
+		}
+
+		// 기존 생성된 maxNumber 보다 number가 크면 추가 생성
+		if (number > eratosthenes.size()) {
+			makeEratosthenes(number);
+		}
+
+		return eratosthenes.get(number);
+
+	}
 
 	/**
 	 * 팩토리얼 값을 리턴한다. 팩토리얼 정의에 따라 0! = 1 이고 입력값은 0 이상의 정수만 받는다.
