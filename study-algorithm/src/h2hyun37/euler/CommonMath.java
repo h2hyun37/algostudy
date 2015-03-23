@@ -12,17 +12,10 @@ public class CommonMath {
 
 
 	/**
-	 * 에라토스테네스의 체를 생성한다.
-	 *
+	 * 에라토스테네스의 체를 생성한다. <br />
 	 * <br />
-	 * <br />
-	 * <b>
-	 * 	TODO : 이미 생성되어 있으면 maxNumber를 비교하여 maxNumber가 더 큰 경우에만 생성
-	 * 	<br />
-	 * 	그리고 기존 최대값 이후부터만 만들도록 한다. 새로 생성하면 비효율적이므로.
-	 * 	<br />
-	 * 	예를 들어 기존 최대값 120인 상태에서 maxNumber 200이 입력되면 121~200까지만 생성하도록...
-	 * </b>
+	 * 처음 1회 호출시 2~maxNumber 까지 체를 생성 <br />
+	 * 이후 호출시 기존maxNumber+1 ~ maxNumber까지 체를 생성 <br />
 	 *
 	 * @param maxNumber
 	 *            : 최대로 생성할 숫자. 예를 들어 120이 입력되면 2~120까지의 숫자까지 true/false로 소수여부를
@@ -30,15 +23,29 @@ public class CommonMath {
 	 */
 	public static void makeEratosthenes(int maxNumber) {
 
-		eratosthenes = new HashMap<Integer, Boolean>(maxNumber);
+		// 기존에 이미 체가 생성되어있고, 기존의 size가 maxNumber보다 크면 그냥 리턴
+		if (eratosthenes != null && eratosthenes.size() > maxNumber) {
+			return;
+		}
 
-		// map 전체를 true로 초기화 (true : 소수, false : 소수가 아님)
-		for (int key = 2; key < maxNumber; key++) {
+
+		int primeNumber = 0; // 소수여부를 판별할 시작수
+		if (eratosthenes == null) {
+			eratosthenes = new HashMap<Integer, Boolean>(maxNumber);
+			eratosthenes.put(1, false);
+			primeNumber = 2;
+		} else {
+			primeNumber = eratosthenes.size() + 1;
+		}
+
+
+		// 소수 판별할 수 전체를 true로 초기화 (true : 소수, false : 소수가 아님)
+		for (int key = primeNumber; key <= maxNumber; key++) {
 			eratosthenes.put(key, true);
 		}
 
 
-		for (int number = 2; number <= maxNumber; number++) {
+		for (int number = primeNumber; number <= maxNumber; number++) {
 
 			// 이미 소수가 아니라고 판명된 수는 skip
 			if (eratosthenes.get(number) == false) {
@@ -82,25 +89,16 @@ public class CommonMath {
 
 	public static boolean isPrimeNumber(int number) {
 
-		/*
-		 * STEP 1 : 에라토스테네스의 체를 구한다
-		 */
 		if (eratosthenes == null) {
 			makeEratosthenes(number);
 		}
 
-		/*
-		 * STEP 2 : 키 값이 이미 있는 경우에만 소수여부 판별.
-		 *
-		 */
-		// TODO : 추후에는 이 시점에 진입하면 무조건 키값이 있도록...
-		if (eratosthenes.containsKey(number)) {
-
-			return eratosthenes.get(number);
-
-		} else {
-			return false;
+		// 기존 생성된 maxNumber 보다 number가 크면 추가 생성
+		if (number > eratosthenes.size()) {
+			makeEratosthenes(number);
 		}
+
+		return eratosthenes.get(number);
 
 	}
 
