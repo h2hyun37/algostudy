@@ -35,7 +35,7 @@ public class Problem27 extends AbstractProblem {
 
 		long startTime = System.currentTimeMillis();
 
-		CommonMath.makeEratosthenes(1000);
+		CommonMath.makeEratosthenes(13000);
 
 		// display elapsed time
 		System.out.println("Process Time: "

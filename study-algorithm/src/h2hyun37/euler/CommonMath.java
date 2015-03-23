@@ -87,7 +87,18 @@ public class CommonMath {
 
 	}
 
+
+	/**
+	 * 소수인지를 판별하여 true/false 리턴
+	 *
+	 * @param number 판별할 숫자
+	 * @return 소수인경우 true, 소수가 아니거나 1이하의 정수(0, 음의 정수 포함)인 경우 false
+	 */
 	public static boolean isPrimeNumber(int number) {
+
+		if (number < 2) {
+			return false;
+		}
 
 		if (eratosthenes == null) {
 			makeEratosthenes(number);
