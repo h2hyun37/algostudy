@@ -89,23 +89,23 @@ public class Problem11 extends AbstractProblem {
 	int matrixHeight = matrix.length;
 
 	// 연속으로 곱할 숫자 갯수
-	long multiplyNumCount = 6;
+	int multiplyNumCount = 6;
 
 
 	@Override
 	public void solveProblem() {
 
 		// 가장 큰 수를 저장할 변수
-		int biggestNum = 0;
+		long biggestNum = 0;
 
 		for (int vertIdx = 0; vertIdx < matrixHeight; vertIdx++) {
 			for (int horizonIdx = 0; horizonIdx < matrixWidth; horizonIdx++) {
 
 				// 가로, 세로, 대각선1 (좌상우하) , 대각선2 (우상좌하) 의 곱을 저장할 변수들
-				int multiplyHorizon = 1;
-				int multiplyVert = 1;
-				int multiplyDiagonal1 = 1;
-				int multiplyDiagonal2 = 1;
+				long multiplyHorizon = 1;
+				long multiplyVert = 1;
+				long multiplyDiagonal1 = 1;
+				long multiplyDiagonal2 = 1;
 
 
 				/*
@@ -202,11 +202,11 @@ public class Problem11 extends AbstractProblem {
 				/*
 				 * 가장 큰 수를 비교하여 저장
 				 */
-				int biggerNum1 = multiplyHorizon > multiplyVert ? multiplyHorizon
+				long biggerNum1 = multiplyHorizon > multiplyVert ? multiplyHorizon
 						: multiplyVert;
-				int biggerNum2 = multiplyDiagonal1 > multiplyDiagonal2 ? multiplyDiagonal1
+				long biggerNum2 = multiplyDiagonal1 > multiplyDiagonal2 ? multiplyDiagonal1
 						: multiplyDiagonal2;
-				int biggerNum = biggerNum1 > biggerNum2 ? biggerNum1
+				long biggerNum = biggerNum1 > biggerNum2 ? biggerNum1
 						: biggerNum2;
 
 				biggestNum = biggestNum > biggerNum ? biggestNum : biggerNum;
