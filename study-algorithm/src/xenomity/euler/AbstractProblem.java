@@ -12,13 +12,13 @@ public abstract class AbstractProblem<T> implements IProblem<T> {
 	 * Solve Problem
 	 */
 	public void solve() {
-		long startTime = System.nanoTime();
+		long startTime = System.currentTimeMillis();
 		
 		problem();
 		
 		// display logs
 		System.out.println("Result: " + getResult());
-		System.out.println("Process Time: " + (System.nanoTime() - startTime) + " nano times.");
+		System.out.println("Process Time: " + (System.currentTimeMillis() - startTime) + " ms.");
 	}
 	
 }
