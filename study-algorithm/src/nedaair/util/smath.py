@@ -58,6 +58,9 @@ def yaksu(target) :
 
     return result
 
+def maxCommonYaksu(target1, target2) :
+    return sorted(list(set(yaksu(target1)).intersection(set(yaksu(target2))))).pop()
+
 
 def factorial(n) :
     if n == 0 or n == 1 : return 1
