@@ -1,5 +1,6 @@
 package h2hyun37.euler;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -10,6 +11,50 @@ public class CommonMath {
 
 	static Map<Integer, Boolean> eratosthenes = null;
 
+
+	/**
+	 * 순서를 고려하지 않은 경우의 수 (즉 조합) 을 구한다. (nCr)
+	 *
+	 *
+	 * @param n 전체 갯수
+	 * @param r 순서에 상관없이 고르는 갯수
+	 * @return long 경우의 수
+	 */
+	public static long combination(int n, int r) {
+
+		/*
+		 * nCr = (n * n-1 * ... * n-r+1) / r!
+		 */
+
+		/*
+		 * STEP 1 : calculate numerator (n * n-1 * ... * n-r+1)
+		 */
+		BigInteger numerator = BigInteger.ONE;
+		int i = n;
+		while (i >= n - r + 1) {
+			numerator = numerator.multiply(new BigInteger(Integer.toString(i)));
+			i--;
+		}
+
+		/*
+		 * STEP 2 : calculate denominator (r!)
+		 */
+		BigInteger denominator = BigInteger.ONE;
+		int j = r;
+
+		while (j >= 1) {
+			denominator = denominator.multiply(new BigInteger(Integer
+					.toString(j)));
+			j--;
+		}
+
+		/*
+		 * STEP 3 : divide
+		 */
+		numerator = numerator.divide(denominator);
+
+		return numerator.longValue();
+	}
 
 	/**
 	 * 에라토스테네스의 체를 생성한다. <br />
