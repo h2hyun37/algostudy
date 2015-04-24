@@ -13,6 +13,40 @@ public class CommonMath {
 
 
 	/**
+	 * 대칭수 판별 메소드
+	 *
+	 * @param number
+	 *            String type의 number 를 받는다. (2진수 등도 처리 가능하도록)
+	 * @return
+	 */
+	public static boolean isPalindrome(String number) {
+
+		char[] cArr = number.toCharArray();
+
+		int idx = cArr.length;
+
+		/*
+		 * 숫자 갯수가 홀수개/짝수개인 것에 따라, 비교를 하는 index 값을 다르게 설정 (idx 는 0부터 시작하므로 +1한
+		 * 값으로 홀짝 판단)
+		 */
+		int endIdx;
+		if ((idx + 1) % 2 == 0) {
+			endIdx = idx / 2;
+		} else {
+			endIdx = (idx / 2) - 1;
+		}
+
+		for (int forwardIdx = 0, backwardIdx = idx - 1; forwardIdx <= endIdx; forwardIdx++, backwardIdx--) {
+
+			if (cArr[forwardIdx] != cArr[backwardIdx]) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	/**
 	 * 순서를 고려하지 않은 경우의 수 (즉 조합) 을 구한다. (nCr)
 	 *
 	 *
