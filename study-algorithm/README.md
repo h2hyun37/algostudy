@@ -1,9 +1,9 @@
 # ADP Expert Group #
 
-### Study Subject ###
-Algorithm
+### Subject ###
+Trendy Technique, Architecturing, Programming and Algorithm. 
 
-### Study Member ###
+### Members ###
 * [Xenomity] 이승한
 * [Nedaair] 서정수
 * [h2hyun37] 국현호
