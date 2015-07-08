@@ -1,7 +1,5 @@
 /bin/
-.classpath
 /.settings
-.project
-.cache
+.*
 *.DS_Store
 /build/

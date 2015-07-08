@@ -1,5 +1,8 @@
 package xenomity.study.tree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Binary Tree (이진 트리)
@@ -8,14 +11,14 @@ package xenomity.study.tree;
  * @since 2014. 12. 13.
  *
  */
-public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
+public class BinaryTree<T> implements TreeNode<T>, Bidirectionable<T> {
 
 	public static final int LEFT_NODE = 0;
 	public static final int RIGHT_NODE = 1;
 	private static final int MAX_LIMIT = 2;
-	private final BinaryTree[] childList = new BinaryTree[MAX_LIMIT];
-	private BinaryTree parent;
-	private Integer value;
+	private final List<BinaryTree<T>> childList = new ArrayList<>(MAX_LIMIT);
+	private BinaryTree<T> parent;
+	private T value;
 	
 	/**
 	 * The Constructor
@@ -27,7 +30,7 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	 * 
 	 * @param value value
 	 */
-	public BinaryTree(Integer value) {
+	public BinaryTree(T value) {
 		this();
 		this.value = value;
 		
@@ -41,7 +44,7 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	 * @param parent parent tree node
 	 * @throws IllegalAccessException 
 	 */
-	public BinaryTree(Integer value, BinaryTree parent) throws IllegalAccessException {
+	public BinaryTree(T value, BinaryTree<T> parent) throws IllegalAccessException {
 		this();
 		this.value = value;
 		
@@ -69,21 +72,21 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	}
 
 	@Override
-	public void setNodeValue(Integer value) {
+	public void setNodeValue(T value) {
 		this.value = value;
 		
 		init();
 	}
 
 	@Override
-	public Integer getNodeValue() {
+	public T getNodeValue() {
 		return value;
 	}
 
 	@Override
-	public void setChild(TreeNode<Integer> treeNode, int childIndex) {
-		BinaryTree binaryTree = (BinaryTree) treeNode;
-		childList[childIndex] = binaryTree;
+	public void setChild(TreeNode<T> treeNode, int childIndex) {
+		BinaryTree<T> binaryTree = (BinaryTree<T>) treeNode;
+		childList.set(childIndex, binaryTree);
 		
 		try {
 			binaryTree.setParent(this);
@@ -93,16 +96,16 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	}
 
 	@Override
-	public TreeNode<Integer> getChild(int childIndex) {
-		return childList[childIndex];
+	public TreeNode<T> getChild(int childIndex) {
+		return childList.get(childIndex);
 	}
 	
 	@Override
 	public void removeChild(int childIndex) {
-		childList[childIndex] = new BinaryTree();
+		childList.set(childIndex, new BinaryTree<T>());
 		
 		try {
-			childList[childIndex].setParent(this);
+			childList.get(childIndex).setParent(this);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
@@ -114,7 +117,7 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	}
 	
 	@Override
-	public TreeNode<Integer> getParent() throws IllegalAccessException {
+	public TreeNode<T> getParent() throws IllegalAccessException {
 		if (parent == null) {
 			throw new IllegalAccessException("current node is root,");
 		}
@@ -123,9 +126,9 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	}
 
 	@Override
-	public void setParent(TreeNode<Integer> treeNode)
+	public void setParent(TreeNode<T> treeNode)
 			throws IllegalAccessException {
-		BinaryTree binaryTree = (BinaryTree) treeNode;
+		BinaryTree<T> binaryTree = (BinaryTree<T>) treeNode;
 		
 		// argument validation
 		if (binaryTree.isEmpty()) {
@@ -141,9 +144,9 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	}
 	
 	@Override
-	public void removeChild(TreeNode<Integer> treeNode) {
+	public void removeChild(TreeNode<T> treeNode) {
 		for (int i = 0; i < MAX_LIMIT; i++) {
-			BinaryTree elementNode = childList[i];
+			BinaryTree<T> elementNode = childList.get(i);
 			
 			if (elementNode.equals(treeNode)) {
 				removeChild(i);
@@ -158,17 +161,17 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	
 	@Override
 	public boolean isLeaf() {
-		return value != null && childList[LEFT_NODE].isEmpty() && childList[RIGHT_NODE].isEmpty();
+		return value != null && childList.get(LEFT_NODE).isEmpty() && childList.get(RIGHT_NODE).isEmpty();
 	}
 	
 	// initialize
 	private void init() {
-		childList[LEFT_NODE] = new BinaryTree();
-		childList[RIGHT_NODE] = new BinaryTree();
+		childList.set(LEFT_NODE, new BinaryTree<T>());
+		childList.set(RIGHT_NODE, new BinaryTree<T>());
 		
 		try {
-			childList[LEFT_NODE].setParent(this);
-			childList[RIGHT_NODE].setParent(this);
+			childList.get(LEFT_NODE).setParent(this);
+			childList.get(RIGHT_NODE).setParent(this);
 		} catch (IllegalAccessException e) {
 			e.printStackTrace();
 		}
@@ -189,7 +192,7 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	 * @return if current node have two children.
 	 */
 	public boolean isFull() {
-		return !childList[LEFT_NODE].isEmpty() && !childList[RIGHT_NODE].isEmpty();
+		return !childList.get(LEFT_NODE).isEmpty() && !childList.get(RIGHT_NODE).isEmpty();
 	}
 	
 	/**
@@ -198,12 +201,12 @@ public class BinaryTree implements TreeNode<Integer>, Bidirectionable<Integer> {
 	 * @param childNode child node
 	 * @return child node index
 	 */
-	public int contain(BinaryTree childNode) {
+	public int contain(BinaryTree<T> childNode) {
 		int containIndex = -1;
 		
-		if (childList[LEFT_NODE].equals(childNode)) {
+		if (childList.get(LEFT_NODE).equals(childNode)) {
 			containIndex = LEFT_NODE;
-		} else if (childList[RIGHT_NODE].equals(childNode)) {
+		} else if (childList.get(RIGHT_NODE).equals(childNode)) {
 			containIndex = RIGHT_NODE;
 		}
 		
