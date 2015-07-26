@@ -1,7 +1,5 @@
 package xenomity.acmicpc
 
-import scala.collection.mutable.ArrayBuffer
-
 /**
  * No. 1017
  * 
