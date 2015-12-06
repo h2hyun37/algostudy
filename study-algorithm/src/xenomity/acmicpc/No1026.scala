@@ -6,11 +6,10 @@ object No1026 {
       for (i <- 0 until numbers.length - 1) {
         for ( j <- i + 1 until numbers.length) {
           if (isPrime(numbers(i) + numbers(j))) {
-            val childNumbers = numbers
-                  .filter(_ != numbers(i))
-                  .filter(_ != numbers(j)).toList
+            val matchNumbers = List(numbers(i), numbers(j))
+            val childNumbers = numbers diff matchNumbers
             
-            return List(numbers(i), numbers(j)) ++ solve(childNumbers)
+            return matchNumbers ++ solve(childNumbers)
           }
         }
       }
